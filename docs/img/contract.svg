@@ -1,0 +1,48 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1160" height="470" viewBox="0 0 1160 470" font-family="-apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif">
+  <rect width="1160" height="470" fill="#FAFBFC"/>
+  <text x="40" y="48" font-size="26" font-weight="700" fill="#1B1F24">contract-testing-rest-grpc - catch breaking changes in CI, not at 2am</text>
+  <text x="40" y="76" font-size="15" fill="#57606A">two ways a service contract drifts: a REST response stops matching its schema, or a proto field number shifts under you.</text>
+  <rect x="40" y="110" width="530" height="330" rx="12" fill="#FFFFFF" stroke="#D0D7DE" stroke-width="1.5"/>
+  <text x="64" y="146" font-size="18" font-weight="700" fill="#0A53C9">REST - Schemathesis</text>
+  <rect x="64" y="168" width="200" height="60" rx="9" fill="#EAF1FB" stroke="#9DB8E5" stroke-width="1.4"/>
+  <text x="164" y="194" text-anchor="middle" font-size="14" font-weight="600" fill="#0A53C9">openapi.yaml</text>
+  <text x="164" y="214" text-anchor="middle" font-size="12.5" fill="#244b8f">source of truth</text>
+  <rect x="346" y="168" width="200" height="60" rx="9" fill="#FFFFFF" stroke="#D0D7DE" stroke-width="1.4"/>
+  <text x="446" y="194" text-anchor="middle" font-size="14" font-weight="600" fill="#1B1F24">Schemathesis</text>
+  <text x="446" y="214" text-anchor="middle" font-size="12.5" fill="#57606A">generates requests</text>
+  <rect x="205" y="268" width="200" height="60" rx="9" fill="#FFFFFF" stroke="#D0D7DE" stroke-width="1.4"/>
+  <text x="305" y="294" text-anchor="middle" font-size="14" font-weight="600" fill="#1B1F24">running service</text>
+  <text x="305" y="314" text-anchor="middle" font-size="12.5" fill="#57606A">real responses</text>
+  <rect x="64" y="366" width="482" height="56" rx="9" fill="#EAF3EC" stroke="#AECDB4" stroke-width="1.4"/>
+  <text x="305" y="390" text-anchor="middle" font-size="13.5" font-weight="700" fill="#1A7F37">checks: response matches schema, status codes declared, no 5xx</text>
+  <text x="305" y="410" text-anchor="middle" font-size="12.5" fill="#36603F">+ pytest wrapper for fields downstream services depend on</text>
+  <g stroke="#8C959F" stroke-width="2" fill="none" marker-end="url(#ah2)">
+    <line x1="264" y1="198" x2="342" y2="198"/>
+    <line x1="446" y1="228" x2="360" y2="266"/>
+    <line x1="305" y1="328" x2="305" y2="362"/>
+  </g>
+  <rect x="600" y="110" width="520" height="330" rx="12" fill="#FFFFFF" stroke="#D0D7DE" stroke-width="1.5"/>
+  <text x="624" y="146" font-size="18" font-weight="700" fill="#6F42C1">gRPC - proto descriptor checks</text>
+  <rect x="624" y="168" width="200" height="60" rx="9" fill="#F3EEFB" stroke="#C4ACE9" stroke-width="1.4"/>
+  <text x="724" y="194" text-anchor="middle" font-size="14" font-weight="600" fill="#6F42C1">order.proto</text>
+  <text x="724" y="214" text-anchor="middle" font-size="12.5" fill="#50337f">compiled to _pb2</text>
+  <rect x="896" y="168" width="200" height="60" rx="9" fill="#FFFFFF" stroke="#D0D7DE" stroke-width="1.4"/>
+  <text x="996" y="194" text-anchor="middle" font-size="14" font-weight="600" fill="#1B1F24">descriptor parse</text>
+  <text x="996" y="214" text-anchor="middle" font-size="12.5" fill="#57606A">no server needed</text>
+  <rect x="624" y="268" width="472" height="154" rx="9" fill="#EAF3EC" stroke="#AECDB4" stroke-width="1.4"/>
+  <text x="860" y="294" text-anchor="middle" font-size="13.5" font-weight="700" fill="#1A7F37">asserts stay-stable contract</text>
+  <text x="648" y="320" font-size="12.8" fill="#36603F">- field numbers unchanged (wire format depends on them)</text>
+  <text x="648" y="342" font-size="12.8" fill="#36603F">- required fields still present</text>
+  <text x="648" y="364" font-size="12.8" fill="#36603F">- enum UNSPECIFIED stays 0, known values keep numbers</text>
+  <text x="648" y="386" font-size="12.8" fill="#36603F">- service RPCs (GetOrder, CreateOrder, ListOrders) still exist</text>
+  <text x="648" y="408" font-size="12.8" fill="#36603F">- messages serialize/deserialize round-trip</text>
+  <g stroke="#8C959F" stroke-width="2" fill="none" marker-end="url(#ah2)">
+    <line x1="824" y1="198" x2="892" y2="198"/>
+    <line x1="860" y1="228" x2="860" y2="262"/>
+  </g>
+  <defs>
+    <marker id="ah2" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M1 1 L9 5 L1 9" fill="none" stroke="#8C959F" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+    </marker>
+  </defs>
+</svg>

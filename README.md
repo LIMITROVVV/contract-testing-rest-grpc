@@ -1,8 +1,13 @@
 # Contract testing: REST + gRPC
 
+![python](https://img.shields.io/badge/python-3.11-3776AB?logo=python&logoColor=white) ![schemathesis](https://img.shields.io/badge/REST-Schemathesis-6BA539) ![grpc](https://img.shields.io/badge/gRPC-protobuf-6F42C1) ![license](https://img.shields.io/badge/license-MIT-green)
+
 Contract testing is about catching breaking API changes before they hit production. When service A depends on service B's API, the question is: if team B changes their contract (renames a field, removes an endpoint, changes a type), when do we find out? Ideally in CI, not at 2am.
 
 This repo covers two flavors I run in my projects: schema-based property testing for REST APIs via Schemathesis, and proto compatibility checks for gRPC services. Neither replaces integration tests, but they catch a whole class of drift bugs that unit tests simply can't see.
+
+
+![architecture diagram](docs/img/contract.svg)
 
 ## Structure
 
