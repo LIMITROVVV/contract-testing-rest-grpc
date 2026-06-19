@@ -1,0 +1,15 @@
+__pycache__/
+*.pyc
+*.pyo
+.pytest_cache/
+.hypothesis/
+*_pb2.py
+*_pb2_grpc.py
+*.egg-info/
+dist/
+build/
+.venv/
+venv/
+env/
+.env
+*.log

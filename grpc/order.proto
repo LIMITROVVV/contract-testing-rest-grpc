@@ -1,0 +1,67 @@
+syntax = "proto3";
+
+package orders.v1;
+
+option go_package = "github.com/example/orders/proto/v1;ordersv1";
+
+// OrderService manages order lifecycle
+service OrderService {
+  rpc GetOrder(GetOrderRequest) returns (GetOrderResponse);
+  rpc CreateOrder(CreateOrderRequest) returns (CreateOrderResponse);
+  rpc ListOrders(ListOrdersRequest) returns (ListOrdersResponse);
+}
+
+message Order {
+  // field numbers are stable - do not renumber or reuse
+  string id = 1;
+  string customer_id = 2;
+  OrderStatus status = 3;
+  repeated OrderItem items = 4;
+  double total_amount = 5;
+  int64 created_at_unix = 6;   // unix timestamp; using int64 for simplicity
+  int64 updated_at_unix = 7;
+}
+
+message OrderItem {
+  string product_id = 1;
+  int32 quantity = 2;
+  double unit_price = 3;
+}
+
+enum OrderStatus {
+  ORDER_STATUS_UNSPECIFIED = 0;  // proto3 default - always keep at 0
+  ORDER_STATUS_PENDING = 1;
+  ORDER_STATUS_PROCESSING = 2;
+  ORDER_STATUS_COMPLETED = 3;
+  ORDER_STATUS_CANCELLED = 4;
+}
+
+message GetOrderRequest {
+  string order_id = 1;
+}
+
+message GetOrderResponse {
+  Order order = 1;
+}
+
+message CreateOrderRequest {
+  string customer_id = 1;
+  repeated OrderItem items = 2;
+}
+
+message CreateOrderResponse {
+  Order order = 1;
+}
+
+message ListOrdersRequest {
+  // optional filter; zero value = no filter
+  OrderStatus status = 1;
+  int32 limit = 2;
+  string page_token = 3;
+}
+
+message ListOrdersResponse {
+  repeated Order orders = 1;
+  int32 total = 2;
+  string next_page_token = 3;
+}
